@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+
+  db:
+    image: mariadb
+    container_name: gutenberg-test-db
+    volumes:
+      - db-lib:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-wordpress}
+      MYSQL_USER: ${MYSQL_USER:-wordpress}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
+
+  wp:
+    image: wordpress:php7.4
+    container_name: gutenberg-test-wp
+    environment:
+      WORDPRESS_DB_HOST: gutenberg-test-db
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE:-wordpress}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-0}
+    volumes:
+      - wp-html:/var/www/html
+      - ./:/var/www/html/wp-content/plugins/wordpress-gutenberg-multiple-blocks
+    ports:
+      - ${WORDPRESS_PORT:-8082}:80
+    depends_on:
+      - db
+
+  cli:
+    image: wordpress:cli-php7.4
+    container_name: gutenberg-test-cli
+    environment:
+      WORDPRESS_DB_HOST: gutenberg-test-db
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE:-wordpress}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
+      WORDPRESS_HOST: ${WORDPRESS_HOST:-localhost}
+      WORDPRESS_PORT: ${WORDPRESS_PORT:-8082}
+      WP_CLI_PACKAGES_DIR: /tmp/wp-cli
+    volumes_from:
+      - wp
+    depends_on:
+      - wp
+      - db
+    user: xfs # Make Linux alpine and debian user the same user-id
+    command:
+      - sh
+      - -c
+      - |
+        sleep 10
+        wp core install  --url=$${WORDPRESS_HOST}:$${WORDPRESS_PORT} --title=BlockTest --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email
+        echo "Access wordpress on http://$${WORDPRESS_HOST}:$${WORDPRESS_PORT} with user 'admin' and password 'admin'"
+
+networks:
+  default:
+    name: gutenberg-test-net
+
+volumes:
+  db-lib:
+  wp-html:
+
