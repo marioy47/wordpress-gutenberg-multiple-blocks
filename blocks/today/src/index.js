@@ -3,10 +3,20 @@
 import {__} from "@wordpress/i18n";
 import {registerBlockType} from "@wordpress/blocks";
 
+import edit from "./edit";
+import save from "./save";
+
 registerBlockType("gutenberg-multi/today", {
 	title: __("Show blocks creation date", "gutenberg-multi"),
 	category: "widgets",
 	icon: "calendar",
-	edit: () => <h2>Show todays day (Backend)</h2>,
-	save: () => <h2>Show todays day (Frontend)</h2>
+	edit,
+	save,
+	attributes: {
+		exampleAttribute: {
+			source: "html",
+			selector: "h3",
+			default: __("This is a passed attribute", "guten-multi")
+		}
+	}
 });
