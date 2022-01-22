@@ -53,6 +53,9 @@ services:
       - |
         sleep 10
         wp core install  --url=$${WORDPRESS_HOST}:$${WORDPRESS_PORT} --title=BlockTest --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email
+        wp plugin delete hello
+        wp plugin delete akismet
+        wp plugin activate --all
         echo "Access wordpress on http://$${WORDPRESS_HOST}:$${WORDPRESS_PORT} with user 'admin' and password 'admin'"
 
 networks:
