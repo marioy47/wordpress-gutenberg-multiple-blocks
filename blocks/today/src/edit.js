@@ -1,7 +1,7 @@
 // blocks/today/src/edit.js
 
 import {__} from "@wordpress/i18n";
-import "./style.scss"
+import "./edit.scss"
 
 const Edit = (params) => {
 	const {className, isSelected} = params;
