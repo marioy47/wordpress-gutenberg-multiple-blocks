@@ -18,5 +18,16 @@ registerBlockType("gutenberg-multi/today", {
 			selector: "h3",
 			default: __("This is a passed attribute", "guten-multi")
 		}
-	}
+	},
+	styles: [
+		{
+			name: "light",
+			label: __("Light mode", "gutenberg-multi"),
+			isDefault: true
+		},
+		{
+			name: "dark",
+			label: __("Dark mode", "gutenberg-multi")
+		}
+	]
 });

@@ -7,8 +7,15 @@ $bg-color: #000;
   border: 1px solid $bg-color;
   padding: 0.5em;
 
-  &.selected {
+  // &.selected {
+  //   background-color: rgba($bg-color, .85);
+  //   color: white;
+  // }
+
+  &.is-style-dark {
     background-color: rgba($bg-color, .85);
     color: white;
   }
+
+
 }
