@@ -22,7 +22,16 @@ registerBlockType("gutenberg-multi/today", {
 			source: "string",
 			selector: "em",
 			default: __("Content after the options", "gutenberg-multi"),
-		}
+		},
+		blockContent: {
+			source: "html",
+			selector: "p",
+		},
+		blockContentType: {
+			source: "string",
+			type: "select",
+			default: "dump"
+		},
 	},
 	styles: [
 		{

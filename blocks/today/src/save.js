@@ -6,7 +6,7 @@ import "./save.scss";
 
 const Save = (params) => {
 	const {
-		attributes: {className="", blockTitle, afterContent},
+		attributes: {className="", blockTitle, afterContent, blockContent, blockContentType},
 	} = params;
 	return (
 		<>
@@ -16,7 +16,9 @@ const Save = (params) => {
 					className="gutenberg-multi-block-title"
 					value={blockTitle}
 				/>
-				<pre>{JSON.stringify(className, null, 4)}</pre>
+				<pre>{
+					blockContentType == "dump" ? JSON.stringify(className, null, 4) : blockContent
+				}</pre>
 				<RichText.Content
 					tagName="em"
 					className="gutenberg-multi-after-content"
