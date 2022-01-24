@@ -13,10 +13,15 @@ registerBlockType("gutenberg-multi/today", {
 	edit,
 	save,
 	attributes: {
-		exampleAttribute: {
+		blockTitle: {
 			source: "html",
 			selector: "h3",
-			default: __("This is a passed attribute", "guten-multi")
+			default: __("Enter the block title", "gutenberg-multi")
+		},
+		afterContent: {
+			source: "string",
+			selector: "em",
+			default: __("Content after the options", "gutenberg-multi"),
 		}
 	},
 	styles: [
