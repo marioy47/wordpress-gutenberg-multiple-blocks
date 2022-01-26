@@ -18,7 +18,9 @@
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
     "build:today": "wp-scripts build ./blocks/today/src/index.js --output-path=./blocks/today/build",
-    "start:today": "wp-scripts start ./blocks/today/src/index.js --output-path=./blocks/today/build"
+    "start:today": "wp-scripts start ./blocks/today/src/index.js --output-path=./blocks/today/build",
+    "build:mylatests": "wp-scripts build ./blocks/mylatests/src/index.js --output-path=./blocks/mylatests/build",
+    "start:mylatests": "wp-scripts start ./blocks/mylatests/src/index.js --output-path=./blocks/mylatests/build"
   },
   "repository": {
     "type": "git",

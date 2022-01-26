@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "gutenberg-multi/mylatests",
+	"title": "My latests news",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Custom latest posts",
+	"keywords":["latests", "news", "custom"],
+	"textdomain": "gutenberg-multi",
+	"editorScript": "file:./build/index.js"
+}

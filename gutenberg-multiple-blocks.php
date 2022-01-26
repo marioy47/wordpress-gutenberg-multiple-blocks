@@ -49,3 +49,20 @@ function register_user_form_block() {
 }
 
 add_action('init', 'register_user_form_block');
+
+
+add_action('init', 'register_mylatests_block');
+
+function register_mylatests_block() {
+	register_block_type(
+		__DIR__ . '/blocks/mylatests',
+		array(
+			'render_callback' => 'render_mylatests_block',
+		)
+	);
+}
+
+function render_mylatests_block($attributes, $content) {
+	return '<p>My latest news block placeholder</p>';
+}
+
