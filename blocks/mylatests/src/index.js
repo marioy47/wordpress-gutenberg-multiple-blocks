@@ -1,11 +1,11 @@
 // blocks/mylatests/src/index.js
 
 import {registerBlockType} from "@wordpress/blocks";
-import {useBlockProps} from "@wordpress/block-editor";
 import blockMeta from "../block.json";
+import edit from "./edit";
 
 
 registerBlockType( blockMeta, {
-	edit: () => <p {...useBlockProps()}>Placeholder for the backend</p>,
+	edit,
 	save: () => null
 });

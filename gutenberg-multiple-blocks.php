@@ -63,6 +63,26 @@ function register_mylatests_block() {
 }
 
 function render_mylatests_block($attributes, $content) {
-	return '<p>My latest news block placeholder</p>';
+	$posts = get_posts();
+
+	if ( empty($posts) ) {
+		return '<p>No posts found</p>';
+	}
+
+	ob_start();
+?>
+	<h3><?php esc_html_e('My latests posts') ?></h3>
+
+	<ul class="mylatests-posts">
+		<?php foreach ( $posts as $post ): ?>
+			<li class="mylatests-posts-post">
+				<a href="<?php echo esc_url( get_permalink($post->ID)) ?>">
+					<?php echo esc_html($post->post_title) ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+<?php
+	return ob_get_clean();
 }
 
