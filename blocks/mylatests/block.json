@@ -8,5 +8,11 @@
 	"description": "Custom latest posts",
 	"keywords":["latests", "news", "custom"],
 	"textdomain": "gutenberg-multi",
-	"editorScript": "file:./build/index.js"
+	"version": "1.0.0",
+	"editorScript": "file:./build/index.js",
+	"attributes": {
+		"category": {
+			"type": "integer"
+		}
+	}
 }

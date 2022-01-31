@@ -9,19 +9,24 @@ import {Panel, PanelBody, SelectControl} from "@wordpress/components";
 const postsPath = "/wp/v2/posts";
 const catsPath = "/wp/v2/categories?hide_empty=true";
 
-const Edit = () => {
+const Edit = ({attributes, setAttributes}) => {
 	const [cats, setCats] = useState([]);
 	const [posts, setPosts] = useState([]);
+
+	const {category} = attributes;
 
 	useEffect( async () => {
 		const fetchedCats = await apiFetch({path: catsPath});
 		setCats( fetchedCats.map( c => ({label: c.name, value: c.id})));
-	}, []);
+	} , []);
 
-	useEffect( async () => {
-		const fetchedPosts = await apiFetch({path: postsPath});
+	const fetchPosts = async () => {
+		const path = category ? `${postsPath}?categories=${category}` : postsPath;
+		const fetchedPosts = await apiFetch({path});
 		setPosts(fetchedPosts);
-	}, []);
+	}
+
+	useEffect( () => { fetchPosts(); }, [category]);
 
 	if ( posts.length === 0 ) {
 		return <div {...useBlockProps()}>Loading posts</div>;
@@ -35,6 +40,8 @@ const Edit = () => {
 						<SelectControl
 							label={__("Select the category", "gutenberg-multi")}
 							options={cats}
+							value={category || 1}
+							onChange={(val) => setAttributes({category: val})}
 						/>
 					</PanelBody>
 				</Panel>

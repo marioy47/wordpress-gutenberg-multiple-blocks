@@ -63,7 +63,11 @@ function register_mylatests_block() {
 }
 
 function render_mylatests_block($attributes, $content) {
-	$posts = get_posts();
+
+	$args = wp_parse_args($attributes, array(
+		'category' => 1
+	));
+	$posts = get_posts($args);
 
 	if ( empty($posts) ) {
 		return '<p>No posts found</p>';
